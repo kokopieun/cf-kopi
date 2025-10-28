@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cloudflare Worker Manager - Vercel</title>
+    <style>
+        /* CSS sama persis dengan versi sebelumnya */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: Arial, sans-serif; background: #1a1a1a; color: white; padding: 20px; }
+        .container { max-width: 1400px; margin: 0 auto; }
+        /* ... semua CSS dari versi sebelumnya ... */
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">Cloudflare Worker Manager - Vercel</div>
+            <div>
+                <button class="btn" id="loginBtn">Add Account</button>
+                <button class="btn" id="createWorkerBtn" style="display:none;">Create Worker</button>
+                <button class="btn" id="bulkCreateBtn" style="display:none;">Bulk Create</button>
+                <button class="btn btn-warning" id="wildcardBtn" style="display:none;">Wildcard Domain</button>
+                <div class="actions-dropdown" id="bulkActionsDropdown" style="display:none;">
+                    <button class="btn btn-warning">Bulk Actions ▼</button>
+                    <div class="dropdown-content">
+                        <a onclick="showBulkActionsModal()">Manage Selected Workers</a>
+                    </div>
+                </div>
+                <button class="btn btn-info" id="exportConfigBtn" style="display:none;">Export Config</button>
+            </div>
+        </header>
+
+        <!-- Semua HTML content dari versi sebelumnya -->
+        <!-- ... -->
+
+    </div>
+
+    <script>
+        // Base URL untuk API - otomatis detect environment
+        const API_BASE = window.location.hostname === 'localhost' 
+            ? 'http://localhost:3000/api' 
+            : '/api';
+
+        // Update semua fetch call di JavaScript
+        // Contoh:
+        async function login() {
+            const email = document.getElementById('email').value;
+            const apiKey = document.getElementById('apiKey').value;
+
+            if (!email || !apiKey) {
+                showNotification('Email and API key are required', 'error');
+                return;
+            }
+
+            showNotification('Logging in...');
+
+            try {
+                const response = await fetch(API_BASE + '/userInfo', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email: email, globalAPIKey: apiKey })
+                });
+
+                // ... sisanya sama
+            } catch (error) {
+                showNotification('Login failed: ' + error.message, 'error');
+            }
+        }
+
+        // Update semua endpoint calls:
+        // /api/userInfo -> API_BASE + '/userInfo'
+        // /api/createWorker -> API_BASE + '/createWorker'
+        // dll...
+
+        // Semua JavaScript code dari versi sebelumnya tetap sama
+        // hanya perlu update URL endpoints
+    </script>
+</body>
+</html>
