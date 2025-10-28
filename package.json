@@ -1,0 +1,12 @@
+{
+  "name": "cloudflare-worker-manager",
+  "version": "1.0.0",
+  "description": "Cloudflare Worker Management Dashboard",
+  "scripts": {
+    "dev": "vercel dev"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "vercel": "^28.0.0"
+  }
+}
